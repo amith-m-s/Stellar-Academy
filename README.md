@@ -1,2 +1,2 @@
-# ghssazchavattom
+# Stellar Academy
 Educational Purpose
