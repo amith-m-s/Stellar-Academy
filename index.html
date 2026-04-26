@@ -1,1039 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellar Academy - Excellence in Education</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0073e6;
-            --secondary: #005bb5;
-            --accent: #ff6b6b;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-            --success: #28a745;
-            --warning: #ffc107;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            font-size: 2.5rem;
-        }
-
-        .logo-text {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.8rem;
-        }
-
-        .logo-text span {
-            color: var(--accent);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-            border-radius: 30px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 115, 230, 0.8), rgba(0, 91, 181, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-
-        .btn:hover {
-            background: #ff5252;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .about-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Courses Section */
-        .courses-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .course-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .course-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        /* Events Section */
-        .events-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .event-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .event-date {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .event-date .day {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .event-date .month {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
-
-        .event-details {
-            padding: 20px;
-        }
-
-        .event-details h3 {
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-            min-width: 40px;
-        }
-
-        .contact-text h3 {
-            margin-bottom: 5px;
-            color: var(--dark);
-        }
-
-        .contact-form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.2);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-        }
-
-        /* Features Section */
-        .features {
-            background: white;
-        }
-
-        .features-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 30px 20px;
-            border-radius: 10px;
-            transition: var(--transition);
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            nav ul {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                background: var(--primary);
-                width: 100%;
-                text-align: center;
-                transition: var(--transition);
-                padding: 20px 0;
-                box-shadow: var(--shadow);
-            }
-            
-            nav ul.active {
-                left: 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero {
-                padding: 70px 0;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 50px 0;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate {
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        /* Floating Elements */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Preloader */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s, visibility 0.5s;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Scroll to top button */
-        #scrollToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: none;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            z-index: 1000;
-        }
-
-        #scrollToTop:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Stellar Academy - Premium education experience with world-class learning, innovation, and student success." />
+<meta name="theme-color" content="#0b1020" />
+<title>Stellar Academy | Future Starts Here</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#07111f;
+--bg2:#0d1830;
+--card:rgba(255,255,255,.08);
+--stroke:rgba(255,255,255,.12);
+--text:#eef4ff;
+--muted:#a9b6d3;
+--primary:#5b8cff;
+--secondary:#6ef3d6;
+--accent:#ff7a59;
+--shadow:0 20px 60px rgba(0,0,0,.35);
+--radius:24px;
+--max:1280px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at 10% 10%,rgba(91,140,255,.15),transparent 25%),
+radial-gradient(circle at 90% 20%,rgba(110,243,214,.12),transparent 25%),
+linear-gradient(135deg,var(--bg),var(--bg2));
+color:var(--text);
+line-height:1.6;
+overflow-x:hidden;
+}
+
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+.container{width:min(92%,var(--max));margin:auto}
+
+.blur{
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+}
+
+header{
+position:fixed;
+top:0;left:0;width:100%;
+z-index:1000;
+transition:.3s ease;
+}
+header.scrolled{
+background:rgba(7,17,31,.72);
+border-bottom:1px solid var(--stroke);
+}
+
+.nav{
+height:78px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+font-weight:800;
+font-size:1.2rem;
+letter-spacing:.4px;
+}
+.logo-badge{
+width:42px;height:42px;border-radius:14px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:#001;
+font-weight:900;
+box-shadow:var(--shadow);
+}
+
+.menu{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.menu a{
+padding:10px 16px;
+border-radius:999px;
+color:var(--muted);
+font-weight:600;
+transition:.25s;
+}
+.menu a:hover{
+color:var(--text);
+background:rgba(255,255,255,.06);
+}
+
+.cta{
+padding:12px 18px;
+border:none;
+cursor:pointer;
+border-radius:999px;
+font-weight:700;
+background:linear-gradient(135deg,var(--primary),#7f7dff);
+color:#fff;
+box-shadow:0 12px 30px rgba(91,140,255,.35);
+transition:.25s;
+}
+.cta:hover{transform:translateY(-2px)}
+
+.mobile-btn{
+display:none;
+font-size:1.6rem;
+cursor:pointer;
+}
+
+.hero{
+min-height:100vh;
+display:grid;
+place-items:center;
+padding-top:90px;
+position:relative;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:48px;
+align-items:center;
+}
+
+.badge{
+display:inline-flex;
+gap:10px;
+padding:10px 14px;
+border:1px solid var(--stroke);
+border-radius:999px;
+background:rgba(255,255,255,.05);
+color:var(--muted);
+font-size:.92rem;
+margin-bottom:22px;
+}
+
+.hero h1{
+font-size:clamp(2.5rem,7vw,5.3rem);
+line-height:1.02;
+letter-spacing:-2px;
+margin-bottom:18px;
+}
+
+.gradient{
+background:linear-gradient(135deg,#fff,var(--secondary),#8cb4ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+font-size:1.12rem;
+color:var(--muted);
+max-width:620px;
+margin-bottom:28px;
+}
+
+.hero-actions{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.secondary-btn{
+padding:12px 18px;
+border-radius:999px;
+border:1px solid var(--stroke);
+background:rgba(255,255,255,.04);
+color:var(--text);
+font-weight:700;
+}
+
+.panel{
+border:1px solid var(--stroke);
+background:var(--card);
+border-radius:var(--radius);
+padding:22px;
+box-shadow:var(--shadow);
+}
+
+.dashboard{
+display:grid;
+gap:16px;
+transform:rotate(-2deg);
+}
+
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
+
+.stat{
+padding:18px;
+border-radius:20px;
+background:rgba(255,255,255,.05);
+border:1px solid var(--stroke);
+}
+
+.stat h3{
+font-size:2rem;
+margin-bottom:4px;
+}
+
+section{
+padding:90px 0;
+}
+
+.title{
+text-align:center;
+margin-bottom:55px;
+}
+.title span{
+color:var(--secondary);
+font-weight:700;
+letter-spacing:.15em;
+font-size:.85rem;
+}
+.title h2{
+font-size:clamp(2rem,4vw,3.4rem);
+margin-top:8px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:22px;
+}
+
+.card{
+padding:26px;
+border-radius:24px;
+background:var(--card);
+border:1px solid var(--stroke);
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-8px);
+box-shadow:var(--shadow);
+}
+
+.icon{
+width:56px;height:56px;
+border-radius:18px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:#001;
+font-size:1.3rem;
+font-weight:900;
+margin-bottom:18px;
+}
+
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted)}
+
+.split{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:28px;
+align-items:center;
+}
+
+.image-box{
+min-height:420px;
+border-radius:28px;
+background:
+linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35)),
+url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80') center/cover;
+border:1px solid var(--stroke);
+box-shadow:var(--shadow);
+}
+
+.list li{
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,.08);
+color:var(--muted);
+}
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+.quote{
+padding:28px;
+border-radius:24px;
+background:var(--card);
+border:1px solid var(--stroke);
+}
+
+.quote p{
+color:var(--muted);
+margin-bottom:18px;
+}
+
+.author{
+font-weight:700;
+}
+
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+form{
+display:grid;
+gap:14px;
+}
+
+input,textarea{
+width:100%;
+padding:16px;
+border-radius:18px;
+border:1px solid var(--stroke);
+background:rgba(255,255,255,.04);
+color:var(--text);
+outline:none;
+font-family:inherit;
+}
+
+textarea{min-height:140px;resize:vertical}
+
+footer{
+padding:35px 0;
+border-top:1px solid var(--stroke);
+color:var(--muted);
+}
+
+.progress{
+position:fixed;
+top:0;left:0;height:3px;
+background:linear-gradient(90deg,var(--primary),var(--secondary));
+width:0%;
+z-index:2000;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(28px);
+transition:1s ease;
+}
+.reveal.show{
+opacity:1;
+transform:none;
+}
+
+@media(max-width:980px){
+.hero-grid,.split,.contact{
+grid-template-columns:1fr;
+}
+.dashboard{transform:none}
+}
+
+@media(max-width:780px){
+.menu{
+position:fixed;
+top:78px;left:0;right:0;
+background:rgba(7,17,31,.96);
+flex-direction:column;
+padding:20px;
+transform:translateY(-130%);
+transition:.35s;
+border-bottom:1px solid var(--stroke);
+}
+.menu.active{transform:translateY(0)}
+.mobile-btn{display:block}
+}
+
+</style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="logo-text">Stellar <span>Academy</span></div>
-            </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<div class="progress" id="progress"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1 class="animate">Excellence in Education Since 1985</h1>
-            <p class="animate">Empowering students with knowledge, skills, and values for a brighter future</p>
-            <a href="#contact" class="btn animate">Get in Touch</a>
-        </div>
-    </section>
+<header id="header">
+<div class="container nav">
+<div class="logo">
+<div class="logo-badge">S</div>
+<div>Stellar Academy</div>
+</div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Our School</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text animate">
-                    <h3>Our Mission & Vision</h3>
-                    <p>Stellar Academy is committed to providing quality education that nurtures the intellectual, emotional, and physical development of every student. We strive to create an environment where learning is engaging, innovative, and inclusive.</p>
-                    <p>Our vision is to be a leading educational institution that produces confident, creative, and responsible citizens who can contribute meaningfully to society.</p>
-                    <p>With dedicated faculty, state-of-the-art facilities, and a curriculum designed for the 21st century, we prepare our students to excel in their future endeavors.</p>
-                    <a href="#contact" class="btn">Learn More</a>
-                </div>
-                <div class="about-image animate">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="School Campus">
-                </div>
-            </div>
-        </div>
-    </section>
+<nav class="menu" id="menu">
+<a href="#home">Home</a>
+<a href="#programs">Programs</a>
+<a href="#about">About</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+<button class="cta">Apply Now</button>
+</nav>
 
-    <!-- Courses Section -->
-    <section id="courses" class="courses">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Academic Programs</h2>
-            </div>
-            <div class="courses-container">
-                <div class="course-card animate">
-                    <div class="course-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <h3>Science Stream</h3>
-                    <p>Comprehensive science education with laboratory-based learning and research opportunities.</p>
-                </div>
-                <div class="course-card animate">
-                    <div class="course-icon">
-                        <i class="fas fa-pencil-alt"></i>
-                    </div>
-                    <h3>Arts Stream</h3>
-                    <p>Creative and analytical programs focusing on literature, history, and social sciences.</p>
-                </div>
-                <div class="course-card animate">
-                    <div class="course-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3>Commerce Stream</h3>
-                    <p>Business and economics education with practical applications and career guidance.</p>
-                </div>
-                <div class="course-card animate">
-                    <div class="course-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Computer Science</h3>
-                    <p>Modern computer science curriculum with coding, robotics, and digital innovation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="mobile-btn" id="mobileBtn">☰</div>
+</div>
+</header>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Us</h2>
-            </div>
-            <div class="features-container">
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <h3>Expert Faculty</h3>
-                    <p>Highly qualified and experienced teachers dedicated to student success.</p>
-                </div>
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <h3>Modern Facilities</h3>
-                    <p>Well-equipped classrooms, labs, and digital learning resources.</p>
-                </div>
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Extracurricular Activities</h3>
-                    <p>Diverse programs in sports, arts, and clubs for holistic development.</p>
-                </div>
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>Achievement Records</h3>
-                    <p>Consistent academic excellence and student achievements at all levels.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero" id="home">
+<div class="container hero-grid">
 
-    <!-- Events Section -->
-    <section id="events" class="events">
-        <div class="container">
-            <div class="section-title">
-                <h2>Upcoming Events</h2>
-            </div>
-            <div class="events-container">
-                <div class="event-card animate">
-                    <div class="event-date">
-                        <div class="day">15</div>
-                        <div class="month">June</div>
-                    </div>
-                    <div class="event-details">
-                        <h3>Annual Science Fair</h3>
-                        <p>Students showcase their innovative science projects and experiments.</p>
-                        <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
-                    </div>
-                </div>
-                <div class="event-card animate">
-                    <div class="event-date">
-                        <div class="day">22</div>
-                        <div class="month">June</div>
-                    </div>
-                    <div class="event-details">
-                        <h3>Summer Sports Tournament</h3>
-                        <p>Inter-school sports competition in various disciplines.</p>
-                        <p><i class="fas fa-clock"></i> 9:00 AM - 3:00 PM</p>
-                    </div>
-                </div>
-                <div class="event-card animate">
-                    <div class="event-date">
-                        <div class="day">05</div>
-                        <div class="month">July</div>
-                    </div>
-                    <div class="event-details">
-                        <h3>Graduation Ceremony</h3>
-                        <p>Celebration of academic achievements and student accomplishments.</p>
-                        <p><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="reveal">
+<div class="badge">🚀 Trusted Since 1985 • Future Ready Learning</div>
+<h1>Build The <span class="gradient">Leaders</span> Of Tomorrow</h1>
+<p>
+World-class academics, modern technology, innovation labs, mentorship,
+and holistic growth—crafted for students who want to dominate the future.
+</p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info animate">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Our Location</h3>
-                            <p>Stellar Academy, Azchavattom, Kollam, Kerala 691301</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Phone Number</h3>
-                            <p>+91 474 2345678</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Email Address</h3>
-                            <p>stellaracademy@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Working Hours</h3>
-                            <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form animate">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="hero-actions">
+<a href="#contact" class="cta">Get Admission</a>
+<a href="#programs" class="secondary-btn">Explore Programs</a>
+</div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Stellar Academy</h3>
-                    <p>Providing quality education since 1985. We are committed to nurturing the potential of every student through innovative teaching methods and holistic development.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#courses">Academic Programs</a></li>
-                        <li><a href="#events">Events</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Important Links</h3>
-                    <ul>
-                        <li><a href="#">Admissions</a></li>
-                        <li><a href="#">Academic Calendar</a></li>
-                        <li><a href="#">Student Portal</a></li>
-                        <li><a href="#">Parent Resources</a></li>
-                        <li><a href="#">Alumni Network</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to our newsletter for the latest updates and events.</p>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email Address" required>
-                        </div>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Stellar Academy. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--accent);"></i> for Excellence</p>
-            </div>
-        </div>
-    </footer>
+<div class="dashboard panel reveal">
+<div class="stat-grid">
+<div class="stat">
+<h3 data-count="98">0</h3>
+<p>Success Rate</p>
+</div>
+<div class="stat">
+<h3 data-count="2500">0</h3>
+<p>Students</p>
+</div>
+<div class="stat">
+<h3 data-count="120">0</h3>
+<p>Expert Faculty</p>
+</div>
+<div class="stat">
+<h3 data-count="40">0</h3>
+<p>Labs & Clubs</p>
+</div>
+</div>
+</div>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTop" title="Scroll to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+</div>
+</section>
 
-    <script>
-        // Preloader
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
-            }, 1000);
-        });
+<section id="programs">
+<div class="container">
+<div class="title reveal">
+<span>ACADEMICS</span>
+<h2>Elite Learning Programs</h2>
+</div>
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
+<div class="cards">
+<div class="card reveal">
+<div class="icon">⚛</div>
+<h3>Science Excellence</h3>
+<p>Advanced labs, practical research, Olympiad mentoring, future-ready STEM curriculum.</p>
+</div>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+<div class="card reveal">
+<div class="icon">💻</div>
+<h3>Computer Science</h3>
+<p>Coding, AI foundations, robotics, web development, real project experience.</p>
+</div>
 
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                navMenu.classList.remove('active');
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+<div class="card reveal">
+<div class="icon">📈</div>
+<h3>Commerce & Business</h3>
+<p>Finance, entrepreneurship, analytics, leadership and market strategy exposure.</p>
+</div>
 
-        // Scroll to Top Button
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.style.display = 'block';
-            } else {
-                scrollToTopBtn.style.display = 'none';
-            }
-        });
-        
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+<div class="card reveal">
+<div class="icon">🎨</div>
+<h3>Arts & Humanities</h3>
+<p>Critical thinking, communication, culture, creativity and modern global perspective.</p>
+</div>
+</div>
+</div>
+</section>
 
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
-        }
+<section id="about">
+<div class="container split">
+<div class="image-box reveal"></div>
 
-        // Animation on Scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate');
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = 1;
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
+<div class="panel reveal">
+<div class="title" style="text-align:left;margin-bottom:20px">
+<span>WHY US</span>
+<h2>HIgh-Level School Experience</h2>
+</div>
 
-        // Set initial styles for animated elements
-        document.querySelectorAll('.animate').forEach(el => {
-            el.style.opacity = 0;
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        });
+<ul class="list">
+<li>✔ Smart classrooms + premium digital learning systems</li>
+<li>✔ Personalized mentorship for every student</li>
+<li>✔ Leadership, sports, arts & personality growth</li>
+<li>✔ Placement & career readiness ecosystem</li>
+<li>✔ Parent transparency dashboard</li>
+<li>✔ Innovation-first learning culture</li>
+</ul>
+</div>
+</div>
+</section>
 
-        // Initial check
-        animateOnScroll();
-        
-        // Listen for scroll events
-        window.addEventListener('scroll', animateOnScroll);
+<section id="reviews">
+<div class="container">
+<div class="title reveal">
+<span>TRUST</span>
+<h2>What Parents Say</h2>
+</div>
 
-        // Set current time in footer
-        function showTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('currentTime').textContent = timeString;
-        }
-        
-        showTime();
-        setInterval(showTime, 1000);
-    </script>
+<div class="testimonials">
+<div class="quote reveal">
+<p>"The transformation in my child’s confidence and academic performance has been unbelievable."</p>
+<div class="author">— Parent of Grade 10 Student</div>
+</div>
+
+<div class="quote reveal">
+<p>"Best balance of discipline, technology, mentoring, and real growth."</p>
+<div class="author">— Parent Community</div>
+</div>
+
+<div class="quote reveal">
+<p>"Feels like a premium global institution, not a regular school."</p>
+<div class="author">— Alumni Family</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container contact">
+
+<div class="panel reveal">
+<div class="title" style="text-align:left;margin-bottom:18px">
+<span>ADMISSIONS</span>
+<h2>Start Your Journey</h2>
+</div>
+<p style="color:var(--muted)">
+Seats are limited for the next intake. Apply now to secure admission.
+</p>
+</div>
+
+<div class="panel reveal">
+<form id="contactForm">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email Address" required>
+<input type="tel" placeholder="Phone Number" required>
+<textarea placeholder="Tell us about your requirement"></textarea>
+<button class="cta" type="submit">Submit Application</button>
+</form>
+</div>
+
+</div>
+</section>
+
+<footer>
+<div class="container">
+© 2026 Stellar Academy • Designed at FAANG + GOD LEVEL
+</div>
+</footer>
+
+<script>
+const header = document.getElementById("header");
+const progress = document.getElementById("progress");
+const mobileBtn = document.getElementById("mobileBtn");
+const menu = document.getElementById("menu");
+
+mobileBtn.onclick = ()=> menu.classList.toggle("active");
+
+window.addEventListener("scroll",()=>{
+header.classList.toggle("scrolled",window.scrollY>20);
+
+const h = document.documentElement;
+const scrolled = (h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+progress.style.width = scrolled + "%";
+});
+
+document.querySelectorAll('.menu a').forEach(a=>{
+a.addEventListener('click',()=>menu.classList.remove('active'));
+});
+
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+function animateCounter(el){
+const target = +el.dataset.count;
+let count = 0;
+const speed = target / 80;
+
+const timer = setInterval(()=>{
+count += speed;
+if(count >= target){
+el.textContent = target.toLocaleString();
+clearInterval(timer);
+}else{
+el.textContent = Math.floor(count).toLocaleString();
+}
+},20);
+}
+
+const counterObserver = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+animateCounter(entry.target);
+counterObserver.unobserve(entry.target);
+}
+});
+},{threshold:.7});
+
+document.querySelectorAll("[data-count]").forEach(c=>counterObserver.observe(c));
+
+document.getElementById("contactForm").addEventListener("submit",(e)=>{
+e.preventDefault();
+alert("Application submitted successfully 🚀");
+e.target.reset();
+});
+</script>
+
 </body>
 </html>
