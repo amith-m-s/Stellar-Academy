@@ -57,6 +57,11 @@ class AccessibilityContractTests(unittest.TestCase):
         self.assertEqual(attrs.get("aria-expanded"), "false")
         self.assertEqual(attrs.get("aria-label"), "Open navigation menu")
 
+    def test_apply_now_cta_links_to_admissions(self):
+        tag, attrs = self.parser.ids["applyNow"]
+        self.assertEqual(tag, "a")
+        self.assertEqual(attrs.get("href"), "#contact")
+
     def test_primary_navigation_has_an_accessible_name(self):
         tag, attrs = self.parser.ids["menu"]
         self.assertEqual(tag, "nav")
