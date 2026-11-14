@@ -119,6 +119,27 @@ transition:.25s;
 display:none;
 font-size:1.6rem;
 cursor:pointer;
+border:0;
+padding:8px 12px;
+border-radius:12px;
+color:var(--text);
+background:transparent;
+}
+
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+outline:3px solid var(--secondary);
+outline-offset:3px;
+}
+
+.field-label{
+color:var(--muted);
+font-size:.92rem;
+font-weight:600;
+}
+
+.form-status{
+color:var(--secondary);
+min-height:1.5em;
 }
 
 .hero{
@@ -374,18 +395,34 @@ background:rgba(7,17,31,.96);
 flex-direction:column;
 padding:20px;
 transform:translateY(-130%);
-transition:.35s;
+visibility:hidden;
+pointer-events:none;
+transition:transform .35s ease,visibility 0s linear .35s;
 border-bottom:1px solid var(--stroke);
 }
-.menu.active{transform:translateY(0)}
+.menu.active{
+transform:translateY(0);
+visibility:visible;
+pointer-events:auto;
+transition:transform .35s ease,visibility 0s;
+}
 .mobile-btn{display:block}
 }
 
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{
+scroll-behavior:auto!important;
+animation-duration:.01ms!important;
+animation-iteration-count:1!important;
+transition-duration:.01ms!important;
+}
+}
 </style>
 </head>
 <body>
 
-<div class="progress" id="progress"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header id="header">
 <div class="container nav">
@@ -394,7 +431,7 @@ border-bottom:1px solid var(--stroke);
 <div>Stellar Academy</div>
 </div>
 
-<nav class="menu" id="menu">
+<nav class="menu" id="menu" aria-label="Primary navigation">
 <a href="#home">Home</a>
 <a href="#programs">Programs</a>
 <a href="#about">About</a>
@@ -403,7 +440,9 @@ border-bottom:1px solid var(--stroke);
 <button class="cta">Apply Now</button>
 </nav>
 
-<div class="mobile-btn" id="mobileBtn">☰</div>
+<button class="mobile-btn" id="mobileBtn" type="button" aria-label="Open navigation menu" aria-controls="menu" aria-expanded="false">
+<span aria-hidden="true">☰</span>
+</button>
 </div>
 </header>
 
@@ -546,12 +585,21 @@ Seats are limited for the next intake. Apply now to secure admission.
 
 <div class="panel reveal">
 <form id="contactForm">
-<input type="text" placeholder="Full Name" required>
-<input type="email" placeholder="Email Address" required>
-<input type="tel" placeholder="Phone Number" required>
-<textarea placeholder="Tell us about your requirement"></textarea>
+<label class="field-label" for="fullName">Full Name</label>
+<input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Full Name" required>
+
+<label class="field-label" for="emailAddress">Email Address</label>
+<input id="emailAddress" name="email" type="email" autocomplete="email" placeholder="Email Address" required>
+
+<label class="field-label" for="phoneNumber">Phone Number</label>
+<input id="phoneNumber" name="phone" type="tel" autocomplete="tel" placeholder="Phone Number" required>
+
+<label class="field-label" for="message">How can we help?</label>
+<textarea id="message" name="message" placeholder="Tell us about your requirement"></textarea>
+
 <button class="cta" type="submit">Submit Application</button>
 </form>
+<p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
 </div>
 
 </div>
@@ -569,7 +617,22 @@ const progress = document.getElementById("progress");
 const mobileBtn = document.getElementById("mobileBtn");
 const menu = document.getElementById("menu");
 
-mobileBtn.onclick = ()=> menu.classList.toggle("active");
+function setMenuOpen(isOpen){
+menu.classList.toggle("active",isOpen);
+mobileBtn.setAttribute("aria-expanded",String(isOpen));
+mobileBtn.setAttribute("aria-label",isOpen?"Close navigation menu":"Open navigation menu");
+}
+
+mobileBtn.addEventListener("click",()=>{
+setMenuOpen(!menu.classList.contains("active"));
+});
+
+document.addEventListener("keydown",event=>{
+if(event.key==="Escape" && menu.classList.contains("active")){
+setMenuOpen(false);
+mobileBtn.focus();
+}
+});
 
 window.addEventListener("scroll",()=>{
 header.classList.toggle("scrolled",window.scrollY>20);
@@ -580,7 +643,7 @@ progress.style.width = scrolled + "%";
 });
 
 document.querySelectorAll('.menu a').forEach(a=>{
-a.addEventListener('click',()=>menu.classList.remove('active'));
+a.addEventListener('click',()=>setMenuOpen(false));
 });
 
 const observer = new IntersectionObserver(entries=>{
@@ -620,10 +683,10 @@ counterObserver.unobserve(entry.target);
 
 document.querySelectorAll("[data-count]").forEach(c=>counterObserver.observe(c));
 
-document.getElementById("contactForm").addEventListener("submit",(e)=>{
-e.preventDefault();
-alert("Application submitted successfully 🚀");
-e.target.reset();
+document.getElementById("contactForm").addEventListener("submit",event=>{
+event.preventDefault();
+document.getElementById("formStatus").textContent =
+"This demo form is not connected to an admissions service yet. No application was sent.";
 });
 </script>
 
