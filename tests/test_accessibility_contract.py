@@ -99,6 +99,17 @@ class AccessibilityContractTests(unittest.TestCase):
         self.assertIn("visibility:hidden", self.html)
         self.assertIn("visibility:visible", self.html)
 
+    def test_counter_animation_respects_reduced_motion(self):
+        start = self.script.index("function animateCounter(el){")
+        end = self.script.index("\n}\n\nconst counterObserver", start)
+        counter = self.script[start:end]
+        motion_check = counter.index(
+            'window.matchMedia("(prefers-reduced-motion: reduce)")'
+        )
+        self.assertLess(motion_check, counter.index("setInterval"))
+        self.assertIn("el.textContent = target.toLocaleString()", counter)
+        self.assertIn("return;", counter)
+
 
 if __name__ == "__main__":
     unittest.main()
