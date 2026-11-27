@@ -657,7 +657,16 @@ entry.target.classList.add("show");
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 function animateCounter(el){
-const target = +el.dataset.count;
+const target = Number(el.dataset.count);
+if(!Number.isFinite(target) || target < 0){
+return;
+}
+
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+el.textContent = target.toLocaleString();
+return;
+}
+
 let count = 0;
 const speed = target / 80;
 
